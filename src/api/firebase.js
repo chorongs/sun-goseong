@@ -35,20 +35,20 @@ export async function logout() {
 }
 
 export function onUserStateChange(callback) {
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     // 1. 사용자가 있는 경우에 (로그인한 경우)
-
-    callback(user);
+    const updatedUser = user ? await adminUser(user) : user;
+    callback(updatedUser);
   });
 }
 
 async function adminUser(user) {
-  // 2. 사용자가 관리자 권한을 가지고 있는지 확인!
-  // 3. {...user, isAdmin true/false}
   return get(ref(database, 'admins')).then((snapshot) => {
     if (snapshot.exists()) {
       const admins = snapshot.val();
       console.log(admins);
+      const isAdmin = admins.includes(user.uid);
+      return { ...user, isAdmin };
     }
   });
 }
