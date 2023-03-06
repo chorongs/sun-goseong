@@ -61,6 +61,7 @@ export async function addNewRoom(room, imageUrl) {
     id,
     price: parseInt(room.price),
     image: imageUrl,
+    options: room.options.split(','),
   });
 }
 

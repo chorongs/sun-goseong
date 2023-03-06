@@ -84,6 +84,14 @@ export default function NewRoom() {
           required
           onChange={handleChange}
         />
+        <input
+          type='text'
+          name=''
+          value={room.options ?? ''}
+          placeholder='옵션들(콤마(,)로 구분)'
+          required
+          onChange={handleChange}
+        />
         <Button
           text={isUploading ? '업로드중...' : '등록하기'}
           disabled={isUploading}
