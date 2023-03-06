@@ -13,7 +13,7 @@ export default function RoomDetail() {
   } = useLocation();
   const [selected, setSelected] = useState(options && options[0]);
   const handleSelect = (event) => setSelected(event.target.value);
-  const handleClick = (event) => {
+  const handleClick = (e) => {
     const room = { id, image, title, price, option: selected, quantity: 1 };
     addOrUpdateToCart(uid, room);
   };
