@@ -10,6 +10,7 @@ import NewRoom from './pages/NewRoom';
 import NotFound from './pages/NotFound';
 import RoomDetail from './pages/RoomDetail';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ProtectedRoute from './pages/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,11 @@ const router = createBrowserRouter([
       { path: '/rooms', element: <AllRooms /> },
       {
         path: '/rooms/new',
-        element: <NewRoom />,
+        element: (
+          <ProtectedRoute requireAdmin={true}>
+            <NewRoom />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/rooms/:id',
@@ -29,7 +34,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/carts',
-        element: <MyCart />,
+        element: (
+          <ProtectedRoute>
+            <MyCart />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
