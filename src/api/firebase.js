@@ -63,3 +63,12 @@ export async function addNewRoom(room, imageUrl) {
     image: imageUrl,
   });
 }
+
+export async function getRooms() {
+  return get(ref(database, 'rooms')).then((snapshot) => {
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val());
+    }
+    return [];
+  });
+}
