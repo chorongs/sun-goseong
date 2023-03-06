@@ -3,11 +3,42 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Home from './pages/Home';
+import AllRooms from './pages/AllRooms';
+import MyCart from './pages/MyCart';
+import NewRoom from './pages/NewRoom';
+import NotFound from './pages/NotFound';
+import RoomDetail from './pages/RoomDetail';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    errorElement: <NotFound />,
+    children: [
+      { index: true, path: '/', element: <Home /> },
+      { path: '/rooms', element: <AllRooms /> },
+      {
+        path: '/rooms/new',
+        element: <NewRoom />,
+      },
+      {
+        path: '/rooms/:id',
+        element: <RoomDetail />,
+      },
+      {
+        path: '/carts',
+        element: <MyCart />,
+      },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
