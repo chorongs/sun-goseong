@@ -86,7 +86,7 @@ export default function NewRoom() {
         />
         <input
           type='text'
-          name=''
+          name='options'
           value={room.options ?? ''}
           placeholder='옵션들(콤마(,)로 구분)'
           required

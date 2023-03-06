@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { addOrUpdateToCart } from '../api/firebase';
 import Button from '../components/ui/Button';
+import { useAuthContext } from '../context/AuthContext';
 
 export default function RoomDetail() {
+  const { uid } = useAuthContext();
   const {
     state: {
       room: { id, image, title, description, category, options, price },
@@ -11,7 +14,8 @@ export default function RoomDetail() {
   const [selected, setSelected] = useState(options && options[0]);
   const handleSelect = (event) => setSelected(event.target.value);
   const handleClick = (event) => {
-    // 장바구니에 추가하면 됨
+    const room = { id, image, title, price, option: selected, quantity: 1 };
+    addOrUpdateToCart(uid, room);
   };
   return (
     <section>
